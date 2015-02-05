@@ -12,13 +12,13 @@
 
 <body>
     <div ng-app="fileUpload" ng-controller="AppCtrl">
-        Username
+        <!--Username
         <input type="text" ng-model="username"></br></br>
         <input type="checkbox" ng-model="multiple">upload multiple file</br></br>
         watching model:
         <div class="button" ng-file-select ng-model="files" ng-multiple="multiple">Select File</div>
         on file change:
-        <div class="button" ng-file-select ng-file-change="upload($files)" ng-multiple="multiple">Select File</div>
+        <div class="button" ng-file-select ng-file-change="upload($files)" ng-multiple="multiple">Select File</div>-->
         Drop File:
         <div ng-file-drop ng-file-select ng-model="files" class="drop-box"
              drag-over-class="dragover" ng-multiple="true" allow-dir="true"
@@ -33,6 +33,9 @@
             <span style="color:black; white-space:nowrap;">{{dynamic}} / {{max}}</span>
         </progressbar>
         
+
+        <img ng-src="{{ imagePath }}" />
+        <input type="text" ng-model="imageName" ng-change="updateImageName()" />
     </div>
 
     <script src="lib/angular.js"></script>

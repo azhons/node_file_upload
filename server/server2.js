@@ -3,6 +3,8 @@ var formidable = require('formidable');
 var path = require('path');
 var bodyParser = require('body-parser');
 var util = require('util');
+var fs = require('fs');
+var url = require('url');
 var app = express();
 
 app.use('/', express.static(path.join(__dirname, '/../client')));
@@ -29,6 +31,24 @@ app.post('/api/upload_image', function (req, res) {
     incomingForm.parse(req, function (err, fields, files) {
         console.log(util.inspect({ fields: fields, files: files }));
     });
+});
+
+app.use('/show_images', function (req, res) {
+    var request = url.parse(req.url, true);
+    var action = request.pathname;
+
+    //console.log("Requested : " + util.inspect(req));
+    console.log("Requested : " + action);
+    var imagePath = "";
+    if (action === "/autumn.jpg") {
+        imagePath = "uploads" + action;
+    } else {
+        imagePath = "uploads/imagenotavailablegrid.jpg";
+    }
+
+    var img = fs.readFileSync(imagePath);
+    res.writeHead(200, { 'Content-Type': 'image/jpg' });
+    res.end(img, 'binary');
 });
 
 /*Run the server.*/
